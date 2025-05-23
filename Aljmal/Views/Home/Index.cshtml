@@ -1,0 +1,118 @@
+﻿@model sellerInfo
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Dashboard</title>
+    <link rel="stylesheet" href=~/css/SellerCss.css/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="header">
+            <h1>@Model.name</h1>
+            <div class="user-info">
+                <img src="@Model.logo" alt="User">
+                <span>Your Store</span>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats">
+            <div class="stat-card sales">
+                <h3>Today's Sales</h3>
+                <div class="value">$1,254</div>
+                <p><i class="fas fa-arrow-up"></i> 12% from yesterday</p>
+            </div>
+            <div class="stat-card products">
+                <h3>Total Products</h3>
+                <div class="value">@Model.productCount</div>
+                <p>5 low in stock</p>
+            </div>
+            <div class="stat-card visitors">
+                <h3>Store Visitors</h3>
+                <div class="value">324</div>
+                <p><i class="fas fa-arrow-up"></i> 8% from last week</p>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <a asp-action="Create" asp-controller="Home">
+                 <div class="action-btn">
+                    <i class="fas fa-plus-circle"></i>
+                    <span>Add Product</span>
+                </div>
+            </a>
+            
+            <div class="action-btn">
+                <i class="fas fa-tag"></i>
+                <span>Create Discount</span>
+            </div>
+            <div class="action-btn">
+                <i class="fas fa-chart-pie"></i>
+                <span>View Reports</span>
+            </div>
+            <div class="action-btn">
+                <i class="fas fa-bullhorn"></i>
+                <span>Run Promotion</span>
+            </div>
+        </div>
+
+        <!-- Recent Orders -->
+        <div class="recent-orders">
+            <h2>Recent Orders</h2>
+            <table class="orders-table">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Customer</th>
+                        <th>Date</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#ORD-1001</td>
+                        <td>John Smith</td>
+                        <td>Jun 12, 2023</td>
+                        <td>$125.00</td>
+                        <td><span class="order-status status-completed">Completed</span></td>
+                        <td><a href="#">View</a></td>
+                    </tr>
+                    <tr>
+                        <td>#ORD-1002</td>
+                        <td>Sarah Johnson</td>
+                        <td>Jun 11, 2023</td>
+                        <td>$89.50</td>
+                        <td><span class="order-status status-processing">Processing</span></td>
+                        <td><a href="#">View</a></td>
+                    </tr>
+                    <tr>
+                        <td>#ORD-1003</td>
+                        <td>Michael Brown</td>
+                        <td>Jun 10, 2023</td>
+                        <td>$245.75</td>
+                        <td><span class="order-status status-pending">Pending</span></td>
+                        <td><a href="#">View</a></td>
+                    </tr>
+                    <tr>
+                        <td>#ORD-1004</td>
+                        <td>Emily Davis</td>
+                        <td>Jun 9, 2023</td>
+                        <td>$67.30</td>
+                        <td><span class="order-status status-cancelled">Cancelled</span></td>
+                        <td><a href="#">View</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

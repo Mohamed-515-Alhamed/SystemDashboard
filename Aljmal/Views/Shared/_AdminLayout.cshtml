@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Aljmal</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Aljmal.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href=~/css/AdminCss.css/>
+    
+</head>
+<body>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2>Admin Center</h2>
+        </div>
+        <div class="sidebar-menu">
+            <h3>Main</h3>
+            <ul>
+                <li><a asp-action="Index" asp-controller="AdminDashboard"class="active"><i class="fas fa-home"></i> <span>Dashboard</span></a></li>
+                <li><a asp-action="ShowSellers" asp-controller="AdminDashboard"><i class="fas fa-box"></i> <span>Seller</span></a></li>
+                <li><a href="#"><i class="fas fa-users"></i> <span>Customers</span></a></li>
+
+                <li><a href="#"><i class="fas fa-shopping-cart"></i> <span>Orders</span></a></li>
+            </ul>
+            
+            <h3>Business</h3>
+            <ul>
+                <li><a href="#"><i class="fas fa-chart-line"></i> <span>Analytics</span></a></li>
+                <li><a href="#"><i class="fas fa-tags"></i> <span>Promotions</span></a></li>
+                <li><a href="#"><i class="fas fa-money-bill-wave"></i> <span>Payments</span></a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> <span>Settings</span></a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+    @RenderSection("Styles", required: false)
+</body>
+</html>

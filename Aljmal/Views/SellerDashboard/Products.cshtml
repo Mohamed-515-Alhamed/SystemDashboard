@@ -1,0 +1,264 @@
+﻿@model IEnumerable<ProductDto>
+@{
+    ViewData["Title"] = "Products";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        root {
+            --primary-color: #007bff;
+            --hover-color: #0056b3;
+            --transition-time: 0.3s;
+            --border-radius: 30px;
+        }
+
+        .search-container {
+            position:sticky;
+            top: 20px;
+            left: 50%;
+            margin-left: auto;
+            margin-right: auto;
+            width: 80%; /* Adjust width as needed */
+            max-width: 600px; /*
+            justify-content: center; /* Horizontal center */
+            /*transform: translateX(-50%);*/
+/*            width: 100%;
+            max-width: 600px;*/
+            padding: 0 20px;
+            z-index: 1000;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 50px 15px 30px;
+            font-size: 16px;
+            border: none;
+            direction: rtl;
+            text-align: right;
+            border-radius: var(--border-radius);
+            background: #ffffff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all var(--transition-time) ease;
+            outline: none;
+        }
+
+        .search-input::placeholder {
+            color: #999;
+            font-style: italic;
+        }
+
+        .search-input:focus {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            transform: scale(1.02);
+        }
+
+        .search-input:hover {
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 35px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            pointer-events: none;
+            transition: all var(--transition-time) ease;
+        }
+
+        .search-input:focus + .search-icon {
+            color: var(--primary-color);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        @@media (max-width: 768px) {
+            .search-container {
+                top: 10px;
+                max-width: 90%;
+            }
+            
+            .search-input {
+                padding: 12px 40px 12px 20px;
+                font-size: 14px;
+            }
+            
+            .search-icon {
+                right: 25px;
+                font-size: 14px;
+            }
+        }
+
+        /* Animation effects */
+        @@keyframes inputScale {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        .search-input:active {
+            animation: inputScale 0.3s ease;
+        }
+        .products-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            /*padding-left:14%;
+            padding-top:7%;*/
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+        }
+
+        .product-info {
+            direction: rtl; /* Set text direction to right-to-left */
+            text-align: right;
+            padding: 15px;
+        }
+
+        .product-title {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: #333;
+            right:15px;
+        }
+
+        .product-price {
+            right:15px;
+            font-weight: bold;
+            color: #2e8b57;
+            margin-bottom: 10px;
+        }
+
+        .product-description {
+            right:15px;
+            color: #666;
+            font-size: 0.9rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .product-actions {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .product-card:hover .product-actions {
+            opacity: 1;
+        }
+
+        .action-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            color: white;
+            font-size: 16px;
+            transition: transform 0.2s ease;
+        }
+
+        .action-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .edit-btn {
+            background-color: #3498db;
+        }
+
+        .delete-btn {
+            background-color: #e74c3c;
+        }
+
+        .product-stock {
+            font-size: 0.8rem;
+            margin-top: 8px;
+        }
+
+        .in-stock {
+            color: #2ecc71;
+        }
+
+        .out-of-stock {
+            color: #e74c3c;
+        }
+
+        @@media (max-width: 768px) {
+            .products-container {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+        }
+
+        @@media (max-width: 480px) {
+            .products-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+}
+<div class="main-content">
+    <div class="search-container">
+        <input type="text" class="search-input" placeholder="بحـــــث..." >
+        <i class="fas fa-search search-icon"></i>
+    </div>
+    <div class="products-container">
+        @foreach (var product in Model)
+        {
+            <div class="product-card">
+                <img src="http://aljmalapi.runasp.net/@product.imagePath.TrimStart('/')" 
+                    alt="@product.ProductName" 
+                    class="product-image">
+            
+                <div class="product-info">
+                    <h3 class="product-title">@product.ProductName</h3>
+                    <div class="product-price">$@product.Price.ToString()</div>
+                    <p class="product-description">@product.Detials</p>
+                
+                </div>
+            
+                <div class="product-actions">
+                    <a asp-action="Edit" asp-route-id="@product.Id" 
+                       class="action-btn edit-btn" title="Edit">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <form asp-action="DeleteProduct" asp-route-id="@product.Id" method="post"
+                          onsubmit="return confirm('Are you sure you want to delete this product?');">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="action-btn delete-btn" title="Delete">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        }
+    </div>
+</div>

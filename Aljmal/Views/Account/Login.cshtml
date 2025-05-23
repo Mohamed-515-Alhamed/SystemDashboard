@@ -1,0 +1,177 @@
+﻿@{
+    Layout = null;
+    ViewData["Title"] = "تسجيل الدخول";
+}
+@model LoginViewModel
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewData["Title"]</title>
+    <!-- Bootstrap RTL -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2980b9;
+            --text-color: #333;
+            --light-gray: #f8f9fa;
+            --border-radius: 8px;
+            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        body {
+            font-family: 'Tahoma', 'Arial', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .login-container {
+            max-width: 450px;
+            margin: 50px auto;
+            padding: 30px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            transition: all 0.3s ease;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .login-header h2 {
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .login-header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        .form-control {
+            padding: 12px 15px;
+            border-radius: var(--border-radius);
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.25);
+        }
+        
+        .btn-login {
+            background-color: var(--primary-color);
+            border: none;
+            padding: 12px;
+            font-weight: 600;
+            border-radius: var(--border-radius);
+            transition: all 0.3s;
+        }
+        
+        .btn-login:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+        
+        .forgot-password {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: #666;
+            transition: color 0.3s;
+        }
+        
+        .forgot-password:hover {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        .input-group-text {
+            background-color: #f1f1f1;
+            border-radius: var(--border-radius) 0 0 var(--border-radius) !important;
+        }
+        
+        media (max-width: 576px) {
+            .login-container {
+                margin: 20px;
+                padding: 20px;
+            }
+            
+            .login-header h2 {
+                font-size: 1.5rem;
+            }
+        }
+        
+        keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="login-container">
+            <div class="login-header">
+                <h2>سوق الجملة اليمني</h2>
+                <p>اهلا وسهلا بكم</p>
+            </div>
+            
+            <form asp-action="Login" method="post">
+                <div asp-validation-summary="ModelOnly" class="alert-danger"></div>
+                <div class="mb-3">
+                    <label for="email" asp-for="Email" class="form-label">البريد الإلكتروني</label>
+                    <div class="input-group">
+                        <input type="email" class="form-control" id="email" asp-for="Email" placeholder="example@domain.com"  required style="text-align: center;">
+                        <span asp-validation-for="Email" class="alert-danger"></span>
+
+                        @*<span class="input-group-text"><i class="fas fa-envelope"></i></span>*@
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="password" class="form-label">كلمة المرور</label>
+                    <div class="input-group">
+                        <input type="password" class="form-control" id="password" asp-for="Password" placeholder="أدخل كلمة المرور" required style="text-align: center;">
+                        <span asp-validation-for="Password" class="alert-danger"></span>
+
+                        @*<span class="input-group-text" ><i class="fas fa-lock"></i></span>*@
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-login w-100">
+                     تسجيل الدخول
+                </button>
+                
+                <a href="#" class="forgot-password">
+                    <i class="fas fa-key"></i> نسيت كلمة المرور؟
+                </a>
+            </form>
+            
+            <div class="footer">
+                <div><i class="fas fa-envelope me-2"></i> aljmal@gmail.com</div>
+                <div class="mt-2"><i class="fas fa-phone me-2"></i> اتصل بنا</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
