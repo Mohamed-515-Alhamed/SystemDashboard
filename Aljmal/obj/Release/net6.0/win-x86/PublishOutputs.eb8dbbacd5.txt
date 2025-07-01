@@ -1,8 +1,0 @@
-D:\H\Aljmal\obj\Release\net6.0\win-x86\PubTmp\Out\Aljmal.exe
-D:\H\Aljmal\obj\Release\net6.0\win-x86\PubTmp\Out\appsettings.Development.json
-D:\H\Aljmal\obj\Release\net6.0\win-x86\PubTmp\Out\appsettings.json
-D:\H\Aljmal\obj\Release\net6.0\win-x86\PubTmp\Out\Aljmal.dll
-D:\H\Aljmal\obj\Release\net6.0\win-x86\PubTmp\Out\Aljmal.deps.json
-D:\H\Aljmal\obj\Release\net6.0\win-x86\PubTmp\Out\Aljmal.runtimeconfig.json
-D:\H\Aljmal\obj\Release\net6.0\win-x86\PubTmp\Out\Aljmal.pdb
-D:\H\Aljmal\obj\Release\net6.0\win-x86\PubTmp\Out\Newtonsoft.Json.dll
